@@ -15,10 +15,6 @@ class AnswerSelections extends Component {
         }
       }
     
-      componentDidMount(){
-        store.dispatch(getAnswers());
-    }
-
       renderAnswer(text,i)
       {
         return (

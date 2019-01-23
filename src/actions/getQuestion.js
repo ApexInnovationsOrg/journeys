@@ -3,6 +3,7 @@ import {
     FETCH_QUESTION_SUCCESS, 
     FETCH_QUESTION_FAILURE
 } from './types';
+import {getAnswers} from './answerActions';
 
 export function getQuestion(){
     return dispatch => {
@@ -28,6 +29,7 @@ export function getQuestion(){
                 else
                 {
                     dispatch(fetchQuestionSuccess(json.data[0]));
+                    dispatch(getAnswers());
                     return json.data[0];
                 }
             })

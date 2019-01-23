@@ -6,6 +6,9 @@ import {SELECT_ANSWER,
     SUBMIT_ANSWER_SUCCESS,
     SUBMIT_ANSWER_FAILURE} from './types';
 
+
+import {getQuestion} from './getQuestion';
+
 export function getAnswers(){
     return dispatch => {
         dispatch(fetchAnswersBegin());
@@ -63,7 +66,12 @@ export function submitAnswer(activeAnswer){
                 else
                 {
                     dispatch(submitAnswerSuccess(json.data));
+                    
+                    dispatch(getQuestion());
+                    this.getAnswers();
                     return json.data;
+
+
                 }
             })
             .catch(error=>dispatch(submitAnswerFailure(error)));

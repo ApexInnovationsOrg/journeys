@@ -1,0 +1,163 @@
+@import "./variables.scss";
+@import "./margin.scss";
+@import "./padding.scss";
+@import "./buttons.scss";
+
+@media all and (min-width: 1280px) {
+  .container {
+    grid-template-rows: 5fr 53fr 15fr;
+    grid-template-columns: 64px auto;
+    grid-template-areas:
+      "header header"
+      "main main"
+      "footer footer";
+  }
+}
+
+@media all and (max-width: 1280px) {
+  .container {
+    grid-template-rows: 5fr 53fr 15fr;
+    grid-template-columns: 64px auto;
+    grid-template-areas:
+      "header header"
+      "main main"
+      "footer footer";
+  }
+}
+
+@media all and (max-width: 980px) {
+  .container {
+    grid-template-rows: 5fr 53fr 15fr;
+    grid-template-columns: 64px auto;
+    grid-template-areas:
+      "header header"
+      "main main"
+      "footer footer";
+
+
+  }
+}
+
+@media all and (max-width: 736px) {
+  .container {
+    grid-template-rows: 5fr 53fr 15fr;
+    grid-template-columns: 64px auto;
+    grid-template-areas:
+      "header header header"
+      "main main"
+      "footer footer footer";
+  }
+}
+
+@media all and (max-width: 480px) {
+
+  .container {
+    grid-template-rows: 5fr 53fr 15fr;
+    grid-template-columns: 64px auto;
+    grid-template-areas:
+      "header header header"
+      "main main"
+      "footer footer footer";
+  }
+}
+
+.container {
+  position: relative;
+  display: grid;
+  background: #eee;
+  user-select: none;
+  height: 100%;
+  min-width: 600px;
+  padding-left: 64px;
+}
+
+header {
+  grid-area: header;
+  background-color: #dadada;
+  padding: $padding-md $padding-lg;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 60px;
+  max-height: 90px;
+
+  .logo {
+    max-height: 70%;
+    float: right;
+  }
+}
+
+nav {
+  grid-area: nav;
+  position: fixed !important;
+}
+
+main {
+  grid-area: main;
+}
+
+.card {
+  padding: 0 $padding-lg;
+  background-color: white;
+  border: $border;
+  box-shadow: $shadow;
+  border-radius: 6px;
+}
+
+.small-text {
+  font-size: 0.8em;
+}
+
+.loader {
+  position: relative;
+  cursor: default;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: $padding-lg;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+.answerSelections {
+  list-style-position: inside;
+
+  li {
+    margin: $margin-md 0;
+    padding: 0.5em;
+    background-color: white;
+    border: $border;
+    box-shadow: $shadow;
+    border-radius: 6px;
+    cursor: pointer;
+    list-style-type: none;
+    font-weight: bold;
+    font-size: 1.2em;
+
+    &:before {
+      content: "\25CB";
+      padding: 0 $padding-sm;
+    }
+
+    &.selected {
+      background-color: $primary;
+      color: white;
+
+      &:before {
+        content: "\25C9";
+        color: white;
+      }
+    }
+
+    &:not(.selected):hover {
+      background-color: lighten($primary, 40%);
+    }
+
+    &:not(.selected):active {
+      background-color: lighten($primary, 20%);
+    }
+  }
+}

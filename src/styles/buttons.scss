@@ -1,0 +1,46 @@
+@import "./variables.scss";
+@import "./colors.scss";
+
+button {
+	appearance: none;
+	background-color: #aaa;
+	border: $border;
+	padding: $padding-sm $padding-md;
+	font-size: 1.15em;
+	border-radius: 4px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+
+	&:disabled, &.disabled {
+		opacity: 0.5;
+	}
+
+	&.primary {
+		background-color: $primary;
+	}
+
+	&.translucent-light {
+		background-color: $translucent-light;
+		color: #333;
+	}
+	&.translucent {
+		background-color: $translucent;
+	}
+	&.translucent-dark {
+		background-color: $translucent-dark;
+	}
+
+	&.selected {
+		background-color: $primary;
+		color: white;
+	}
+
+
+	svg:last-child:not(:first-child) {
+		margin: 0 0 0 $margin-sm;
+	}
+	svg:first-child:not(:last-child) {
+		margin: 0 $margin-sm 0 0;
+	}
+}

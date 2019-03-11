@@ -1,0 +1,26 @@
+$primary: #2a7bf5;
+$red: #d20000;
+
+$translucent-light: rgba(white, 0.9);
+$translucent: rgba(grey, 0.9);
+$translucent-dark: rgba(black, 0.9);
+
+.white-text {
+	color: white;
+}
+
+.red-text {
+	color: $red;
+}
+
+.translucent {
+	background-color: $translucent;
+}
+
+.translucent-light {
+	background-color: $translucent-light;
+}
+
+.translucent-dark {
+	background-color: $translucent-dark;
+}

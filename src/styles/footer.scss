@@ -1,0 +1,11 @@
+@import "./padding.scss";
+
+footer {
+	grid-area: footer;
+	background-color: #333;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: $padding-lg;
+	align-items: center;
+}

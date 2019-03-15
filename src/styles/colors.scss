@@ -1,5 +1,6 @@
 $primary: #2a7bf5;
 $red: #d20000;
+$green: #3fa82a;
 
 $translucent-light: rgba(white, 0.9);
 $translucent: rgba(grey, 0.9);
@@ -11,6 +12,22 @@ $translucent-dark: rgba(black, 0.9);
 
 .red-text {
 	color: $red;
+}
+
+.green-text {
+	color: $green;
+}
+
+.translucent-text {
+	color: $translucent;
+}
+
+.translucent-light-text {
+	color: $translucent-light
+}
+
+.translucent-dark-text {
+	color: $translucent-dark;
 }
 
 .translucent {

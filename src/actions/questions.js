@@ -1,4 +1,6 @@
-import { beginLoading, finishLoading, showError, updateQuestion, updateAnswers } from "./";
+import { get as _get } from "lodash";
+
+import { beginLoading, finishLoading, showError, updateQuestion, updateAnswers, finishExam } from "./";
 
 function handleErrors(response) {
 	if (!response.ok) {
@@ -9,7 +11,8 @@ function handleErrors(response) {
 
 export function getAnswers() {
 	return dispatch => {
-		dispatch(beginLoading());
+		dispatch(beginLoading("Loading possible answers"));
+
 		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
 			method: "POST",
 			headers: {
@@ -37,7 +40,8 @@ export function getAnswers() {
 
 export function getQuestion() {
 	return dispatch => {
-		dispatch(beginLoading());
+		dispatch(beginLoading("Loading next question"));
+
 		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
 			method: "POST",
 			headers: {
@@ -67,7 +71,8 @@ export function getQuestion() {
 
 export function submitAnswer(answerId) {
 	return dispatch => {
-		dispatch(beginLoading());
+		dispatch(beginLoading("Submitting answer"));
+
 		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
 			method: "POST",
 			headers: {
@@ -86,12 +91,36 @@ export function submitAnswer(answerId) {
 
 				if (!json.success) return dispatch(showError(json.errormsg));
 
-				dispatch(updateQuestion());
-
-				dispatch(getAnswers());
-
-				return json.data;
+				// either finish the exam or load the next question
+				dispatch(_get(json, "data.examComplete") ? getExamResults() : getQuestion());
 			})
-			.catch(error => dispatch(finishLoading(error)));
+			.catch(error => dispatch(showError(error)));
+	};
+}
+
+export function getExamResults() {
+	return dispatch => {
+		dispatch(beginLoading("Loading exam results"));
+
+		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
+			method: "POST",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify({
+				controller: "Exam",
+				action: "getExamResults"
+			})
+		})
+			.then(handleErrors)
+			.then(res => res.json())
+			.then(json => {
+				dispatch(finishLoading());
+
+				if (!json.success) return dispatch(showError(json.errormsg));
+
+				dispatch(finishExam(json.data));
+			})
+			.catch(error => dispatch(showError(error)));
 	};
 }

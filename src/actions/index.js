@@ -5,12 +5,14 @@ import {
 	JUMP_TO_QUESTION,
 	UPDATE_ANSWERS,
 	SELECT_ANSWER,
-	SHOW_ERROR
+	SHOW_ERROR,
+	FINISH_EXAM
 } from "./types";
 
-export function beginLoading() {
+export function beginLoading(status = "") {
 	return {
-		type: BEGIN_LOADING
+		type: BEGIN_LOADING,
+		status
 	};
 }
 
@@ -52,5 +54,12 @@ export function selectAnswer(answerId) {
 	return {
 		type: SELECT_ANSWER,
 		answerId
+	};
+}
+
+export function finishExam(examStatus) {
+	return {
+		type: FINISH_EXAM,
+		examStatus
 	};
 }

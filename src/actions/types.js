@@ -6,3 +6,4 @@ export const JUMP_TO_QUESTION = "JUMP_TO_QUESTION";
 export const UPDATE_ANSWERS = "UPDATE_ANSWERS";
 export const SELECT_ANSWER = "SELECT_ANSWER";
 export const SUBMIT_ANSWER = "SUBMIT_ANSWER";
+export const FINISH_EXAM = "FINISH_EXAM";

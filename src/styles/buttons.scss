@@ -1,13 +1,13 @@
 @import "./variables.scss";
 @import "./colors.scss";
 
-button {
+button, .btn {
 	appearance: none;
 	background-color: #aaa;
 	border: $border;
 	padding: $padding-sm $padding-md;
 	font-size: 1.15em;
-	border-radius: 4px;
+	border-radius: 6px;
 	color: white;
 	font-weight: bold;
 	cursor: pointer;

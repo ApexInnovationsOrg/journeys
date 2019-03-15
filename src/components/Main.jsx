@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import Question from "./Question";
 import AnswerSelections from "./AnswerSelections";
 import NextButton from "./NextButton";
+import ExamCompletion from "./ExamCompletion";
 
 import "../styles/journeys.scss";
 
@@ -29,11 +30,11 @@ export default class Main extends Component {
 				<Header />
 
 				<main style={{ position: "relative" }}>
-					{/* Loader */}
-					{(this.props.isLoading || this.props.error) && <Loader {...this.props} />}
-
 					{!this.props.isLoading && !this.props.error && (
-						<div style={{ margin: "0 auto", maxWidth: "1000px", padding: "1em" }}>
+						<div
+							className={this.props.examStatus.completed ? "blurred" : ""}
+							style={{ margin: "0 auto", maxWidth: "1000px", padding: "1em" }}
+						>
 							{/* Question */}
 							{currentQuestion && <Question question={currentQuestion} />}
 
@@ -47,6 +48,11 @@ export default class Main extends Component {
 							</div>
 						</div>
 					)}
+
+					{this.props.examStatus.completed && <ExamCompletion className="zoom" {...this.props} />}
+
+					{/* Loader */}
+					{(this.props.isLoading || this.props.error) && <Loader {...this.props} />}
 				</main>
 
 				<Footer />

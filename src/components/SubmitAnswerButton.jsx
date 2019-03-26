@@ -6,19 +6,17 @@ import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faChevronCircleRight);
 
-class NextButton extends Component {
+export default class SubmitAnswerButton extends Component {
 	render() {
 		return (
 			<button
 				className="primary"
-				disabled={!this.props.selectedAnswerId || this.props.isLoading || this.props.error}
+				disabled={!this.props.selectedAnswerId || this.props.followUp || this.props.isLoading || this.props.error}
 				onClick={this.props.submitAnswer.bind(null, this.props.selectedAnswerId)}
 			>
-				<span>Next</span>
+				<span>Submit Answer</span>
 				<FontAwesomeIcon icon="chevron-circle-right" />
 			</button>
 		);
 	}
 }
-
-export default NextButton;

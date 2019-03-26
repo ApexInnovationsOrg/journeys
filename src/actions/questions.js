@@ -1,19 +1,35 @@
-import { get as _get } from "lodash";
+import {
+	get as _get,
+	filter as _filter,
+	first as _first,
+	map as _map,
+	find as _find,
+	shuffle as _shuffle
+} from "lodash"
 
-import { beginLoading, finishLoading, showError, updateQuestion, updateAnswers, finishExam } from "./";
+import {
+	beginLoading,
+	finishLoading,
+	showError,
+	updateQuestion,
+	updateAnswers,
+	updateFollowUp,
+	updateexamResults,
+	updateExamResults
+} from "./"
 
 function handleErrors(response) {
 	if (!response.ok) {
-		throw Error(response.statusText);
+		throw Error(response.statusText)
 	}
-	return response;
+	return response
 }
 
 export function getAnswers() {
 	return dispatch => {
-		dispatch(beginLoading("Loading possible answers"));
+		dispatch(beginLoading("Loading possible answers"))
 
-		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
+		return fetch(process.env.REACT_APP_API_LOCATION, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json"
@@ -26,23 +42,25 @@ export function getAnswers() {
 			.then(handleErrors)
 			.then(res => res.json())
 			.then(json => {
-				dispatch(finishLoading());
+				dispatch(finishLoading())
 
-				if (!json.success) return dispatch(showError(json.errormsg));
+				if (!json.success) return dispatch(showError(json.errormsg))
 
-				dispatch(updateAnswers(json.data));
+				dispatch(updateAnswers(_shuffle(json.data)))
 
-				return json.data;
+				return json.data
 			})
-			.catch(error => dispatch(showError(error)));
-	};
+			.catch(error => dispatch(showError(error)))
+	}
 }
 
 export function getQuestion() {
 	return dispatch => {
-		dispatch(beginLoading("Loading next question"));
+		dispatch(beginLoading("Loading next question"))
 
-		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
+		dispatch(updateFollowUp())
+
+		return fetch(process.env.REACT_APP_API_LOCATION, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json"
@@ -55,25 +73,60 @@ export function getQuestion() {
 			.then(handleErrors)
 			.then(res => res.json())
 			.then(json => {
-				dispatch(finishLoading());
+				dispatch(finishLoading())
 
-				if (!json.success) return dispatch(showError(json.errormsg));
+				if (!json.success) return dispatch(showError(json.errormsg))
 
-				dispatch(updateQuestion(json.data[0]));
+				let question = parseQuestion(_get(json, "data"))
 
-				dispatch(getAnswers());
+				if (question === undefined) {
+					// no question provided
+					dispatch(showError("No questions have been provided for this exam."))
+				} else {
+					dispatch(updateQuestion(question))
+					dispatch(getAnswers())
+				}
 
-				return json.data[0];
+				return json.data[0]
 			})
-			.catch(error => dispatch(showError(error)));
-	};
+			.catch(error => dispatch(showError(error)))
+	}
 }
 
+function parseQuestion(questionJSON) {
+	let question = _first(_get(questionJSON, "question"))
+
+	if (question === undefined) return
+	
+	let questionContent = _map(_get(questionJSON, "content"), content => {
+		let parsedContent = JSON.parse(content)
+
+		return {
+			...parsedContent,
+			type: parsedContent.type,
+			label: parsedContent.title,
+			content: parsedContent.text
+		}
+	})
+
+	// get the master media
+	let media = _find(questionContent, media => {
+		return media.type === "masterMedia"
+	})
+
+	if (media !== undefined) question.Media = media.src
+
+	question.sections = _filter(questionContent, {
+		type: "bubble"
+	})
+
+	return question
+}
 export function submitAnswer(answerId) {
 	return dispatch => {
-		dispatch(beginLoading("Submitting answer"));
+		dispatch(beginLoading("Submitting answer"))
 
-		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
+		return fetch(process.env.REACT_APP_API_LOCATION, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json"
@@ -87,22 +140,26 @@ export function submitAnswer(answerId) {
 			.then(handleErrors)
 			.then(res => res.json())
 			.then(json => {
-				dispatch(finishLoading());
+				dispatch(finishLoading())
 
-				if (!json.success) return dispatch(showError(json.errormsg));
+				if (!json.success) return dispatch(showError(json.errormsg))
 
-				// either finish the exam or load the next question
-				dispatch(_get(json, "data.examComplete") ? getExamResults() : getQuestion());
+				// get the follow-up text
+				dispatch(updateFollowUp(_get(json, "data.followUp")))
+
+				dispatch(updateexamResults(_get(json, "data.examComplete")))
 			})
-			.catch(error => dispatch(showError(error)));
-	};
+			.catch(error => dispatch(showError(error)))
+	}
 }
 
 export function getExamResults() {
 	return dispatch => {
-		dispatch(beginLoading("Loading exam results"));
+		dispatch(beginLoading("Loading exam results"))
 
-		return fetch("https://devbox2.apexinnovations.com/JourneyAPI/", {
+		dispatch(updateFollowUp())
+
+		return fetch(process.env.REACT_APP_API_LOCATION, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json"
@@ -115,12 +172,12 @@ export function getExamResults() {
 			.then(handleErrors)
 			.then(res => res.json())
 			.then(json => {
-				dispatch(finishLoading());
+				dispatch(finishLoading())
 
-				if (!json.success) return dispatch(showError(json.errormsg));
+				if (!json.success) return dispatch(showError(json.errormsg))
 
-				dispatch(finishExam(json.data));
+				dispatch(updateExamResults(json.data))
 			})
-			.catch(error => dispatch(showError(error)));
-	};
+			.catch(error => dispatch(showError(error)))
+	}
 }

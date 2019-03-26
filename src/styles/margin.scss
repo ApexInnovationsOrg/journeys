@@ -2,6 +2,18 @@ $margin-sm: 0.4em;
 $margin-md: 0.7em;
 $margin-lg: 1em;
 
+.margin-sm {
+	margin: $margin-sm;
+}
+
+.margin-md {
+	margin: $margin-md;
+}
+
+.margin-lg {
+	margin: $margin-lg;
+}
+
 .margin-left,
 .margin-left-sm {
 	margin-left: $margin-sm;

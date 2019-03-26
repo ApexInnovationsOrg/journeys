@@ -7,13 +7,41 @@ button, .btn {
 	border: $border;
 	padding: $padding-sm $padding-md;
 	font-size: 1.15em;
-	border-radius: 6px;
+	border-radius: 4px;
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
 
 	&:disabled, &.disabled {
 		opacity: 0.5;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&.flat {
+		background-color: transparent !important;
+		border: none;
+		color: #aaa;
+
+	&.primary {
+		color: $primary;
+	}
+
+	&.translucent-light {
+		color: $translucent-light;
+	}
+	&.translucent {
+		color: $translucent;
+	}
+	&.translucent-dark {
+		color: $translucent-dark;
+	}
+
+	&.selected {
+		color: $primary;
+	}
 	}
 
 	&.primary {

@@ -1,51 +1,85 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import { CSSTransition } from "react-transition-group"
 
-import Scenario from "./Scenario";
+import { truncate as _truncate } from "lodash"
 
-import "../styles/question.scss";
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faExpand, faCompress } from "@fortawesome/free-solid-svg-icons"
+
+import Scenario from "./Scenario"
+
+import "../styles/question.scss"
+
+library.add(faExpand, faCompress)
 
 export default class Question extends Component {
 	static propTypes = {
 		question: PropTypes.shape({
 			ID: PropTypes.string.isRequired,
 			QuestionText: PropTypes.string.isRequired,
-			Media: PropTypes.string.isRequired,
-			sections: PropTypes.arrayOf(
+			Media: PropTypes.string,
+			Content: PropTypes.arrayOf(
 				PropTypes.shape({
-					label: PropTypes.string.isRequired,
-					content: PropTypes.string.isRequired
+					type: PropTypes.string.isRequired,
+					title: PropTypes.string.isRequired,
+					text: PropTypes.string.isRequired
 				})
 			)
 		}).isRequired
-	};
+	}
+
+	state = {
+		questionExpanded: false
+	}
 
 	render() {
 		// FIXME:  get rid of these once question object is fully fleshed out coming from the backend
-		this.props.question.Media = "https://i.ytimg.com/vi/mPF296tFRKo/hqdefault.jpg;";
-		this.props.question.sections = [
-			{
-				label: "Situation",
-				content:
-					"This is the situation, fam. I say things. You better believe I say things. Fo shizzle, my glimglam. What is happening, broseph."
-			},
-			{
-				label: "Background",
-				content:
-					"Yo, this is the background, homie. There will never be another background like this background, my glimglam. Holla at ya boi."
-			}
-		];
+		const MAX_QUESTION_LENGTH = 500
 
 		return (
 			<div>
 				{/* Scenario */}
-				<Scenario question={this.props.question} />
+				<CSSTransition in={this.state.questionExpanded} timeout={400} classNames="media">
+					<Scenario question={this.props.question} className="media" />
+				</CSSTransition>
 
 				{/* Text */}
-				<div className="card margin-top-lg">
-					<h3>{this.props.question.QuestionText}</h3>
-				</div>
+				<CSSTransition in={this.state.questionExpanded} timeout={400} classNames="question">
+					<div style={{ position: "relative" }} className="question card margin-top-lg flexed">
+						<div style={{ overflowY: "auto", paddingRight: "2.5em" }}>
+							<div className="margin-sm">
+								{/* truncated */}
+								{!this.state.questionExpanded && (
+									<h3
+										dangerouslySetInnerHTML={{
+											__html: _truncate(this.props.question.QuestionText, {
+												length: MAX_QUESTION_LENGTH
+											})
+										}}
+									/>
+								)}
+
+								{/* full */}
+								{this.state.questionExpanded && (
+									<div dangerouslySetInnerHTML={{ __html: this.props.question.QuestionText }} />
+								)}
+							</div>
+						</div>
+						{this.props.question.QuestionText.length > MAX_QUESTION_LENGTH && (
+							<button
+								title="Expand or collapse question"
+								style={{ position: "absolute", right: "12px" }}
+								className="btn flat primary"
+								onClick={() => this.setState({ questionExpanded: !this.state.questionExpanded })}
+							>
+								<FontAwesomeIcon icon={this.state.questionExpanded ? "compress" : "expand"} size="lg" />
+							</button>
+						)}
+					</div>
+				</CSSTransition>
 			</div>
-		);
+		)
 	}
 }

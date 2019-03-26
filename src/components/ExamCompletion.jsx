@@ -13,8 +13,7 @@ library.add(faCheckCircle);
 
 export default class ExamCompletion extends Component {
 	static propTypes = {
-		examStatus: PropTypes.shape({
-			completed: PropTypes.bool.isRequired,
+		examResults: PropTypes.shape({
 			score: PropTypes.number.isRequired,
 			numberOfQuestions: PropTypes.number.isRequired
 		}).isRequired
@@ -33,10 +32,10 @@ export default class ExamCompletion extends Component {
 			});
 		}, 300);
 
-		const { score, numberOfQuestions } = this.props.examStatus;
+		const { score, numberOfQuestions } = this.props.examResults;
 
 		return (
-			<div className="examCompletionOverlay">
+			<div className="examCompletionOverlay center-align">
 				<CSSTransition
 					classNames="checkmark"
 					in={animateIn}
@@ -55,7 +54,7 @@ export default class ExamCompletion extends Component {
 
 				<CSSTransition classNames="message" in={animateIn} timeout={300} unmountOnExit>
 					<h3 className="translucent-dark-text margin-top-sm margin-bottom-lg padding-bottom-md">
-						You answered {score} questions correctly out of a total of {numberOfQuestions} questions.
+						You earned a score of <div className="primary-text fa-4x margin-top-sm margin-bottom-sm">{score}%</div> across a total of {numberOfQuestions} questions.
 					</h3>
 				</CSSTransition>
 

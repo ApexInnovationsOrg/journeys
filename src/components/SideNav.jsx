@@ -12,23 +12,15 @@ import { faVolumeUp, faVolumeMute, faInfoCircle } from "@fortawesome/free-solid-
 library.add(faVolumeUp, faVolumeMute, faInfoCircle);
 
 class SideNavigation extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			muted: this.props.muted
-		};
+	state = {
+		sideNavExpanded: this.props.sideNavExpanded,
 	}
-
-	onToggle = expanded => {
-		this.setState({ expanded: expanded });
-	};
 
 	itemSelected = selected => {
 		switch (selected) {
 			case "mute":
 				this.setState({
-					muted: !this.state.muted
+					isMuted: !this.props.isMuted
 				});
 				break;
 
@@ -39,19 +31,19 @@ class SideNavigation extends Component {
 
 	render() {
 		return (
-			<SideNav onSelect={this.itemSelected}>
+			<SideNav onSelect={this.itemSelected} expanded={this.props.sideNavExpanded} onToggle={() => this.setState({ sideNavExpanded: !this.props.sideNavExpanded })}>
 				<Toggle />
 				<Nav defaultSelected="Question1">
 					<NavItem disabled eventKey="mute" onClick={this.itemSelected.bind(null, "mute")}>
 						<NavIcon>
 							<FontAwesomeIcon
-								icon={this.state.muted ? "volume-mute" : "volume-up"}
+								icon={this.props.isMuted ? "volume-mute" : "volume-up"}
 								size="lg"
 								fixedWidth
 							/>
 						</NavIcon>
 						<NavText className="padding-right-lg">
-							{this.state.muted ? "Sound is muted." : "Sound is playing."}
+							{this.props.isMuted ? "Sound is isMuted." : "Sound is playing."}
 						</NavText>
 					</NavItem>
 
@@ -68,7 +60,10 @@ class SideNavigation extends Component {
 }
 
 function mapStateToProps(state) {
-	return state;
+	return {
+		sideNavExpanded: state.sideNavExpanded,
+		isMuted: state.isMuted
+	};
 }
 
 export default connect(mapStateToProps)(SideNavigation);

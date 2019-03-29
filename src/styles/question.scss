@@ -27,7 +27,7 @@
 			display: flex;
 			justify-content: flex-start;
 
-			$avatarSize: 80px;
+			$avatarSize: 60px;
 
 			.avatar {
 				display: flex;
@@ -39,10 +39,10 @@
 				border: $border;
 				background-color: $translucent-light;
 				min-width: $avatarSize;
-				min-height: $avatarSize;
 				max-width: $avatarSize;
+				min-height: $avatarSize;
 				max-height: $avatarSize;
-				margin: $margin-md 0 $margin-md $margin-md;
+				margin: $margin-md $margin-sm $margin-md $margin-md;
 				box-sizing: border-box;
 				box-shadow: $shadow;
 				pointer-events: all;
@@ -61,6 +61,12 @@
 				color: #333;
 				box-sizing: border-box;
 				box-shadow: $shadow;
+
+				@media all and (max-width: 736px) {
+					& {
+						max-height: 100px;
+					}
+				}
 				
 				.content {
 					height: 100%;
@@ -124,8 +130,8 @@
 			pointer-events: all;
 			padding: $padding-md;
 
-			button+button {
-				margin-left: $margin-sm;
+			button {
+				margin: $margin-sm;
 			}
 		}
 	}
@@ -169,7 +175,6 @@
 	}
 
 	div {
-		line-height: 1.6em;
 		white-space: pre-wrap;
 	}
 
@@ -203,6 +208,7 @@
 }
 
 .followUp {
+	
 	.card {
 		max-width: 700px;
 		max-height: 700px;
@@ -243,4 +249,51 @@
 .followUp-enter-done {
 	opacity: 1;
 	transform: scale(1);
+}
+
+
+.answerSelections {
+  list-style-position: inside;
+  padding-left: $margin-lg;
+
+  li {
+    cursor: pointer;
+	 list-style-type: none;
+    font-weight: bold;
+	 font-size: 1.2em;
+	 display: flex;
+	 align-items: center;
+	 
+	 * {
+		 font-family: inherit !important;
+		 font-size: inherit !important;
+	 }
+
+    &:before {
+      content: "\25CB";
+      padding: 0 $padding-md;
+    }
+
+    &.selected {
+		background-color: $primary;
+		color: white;
+		
+		* {
+			color: white !important;
+		}
+
+      &:before {
+        content: "\25C9";
+        color: white;
+      }
+    }
+
+    &:not(.selected):hover {
+      background-color: lighten($primary, 40%);
+    }
+
+    &:not(.selected):active {
+      background-color: lighten($primary, 20%);
+    }
+  }
 }

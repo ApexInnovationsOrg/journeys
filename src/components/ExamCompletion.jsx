@@ -59,7 +59,7 @@ export default class ExamCompletion extends Component {
 				</CSSTransition>
 
 				<CSSTransition classNames="message" in={animateIn} timeout={300} unmountOnExit>
-					<a href="/" className="btn primary">Go Somewhere</a>
+					<a href="/" className="btn primary">Return Home</a>
 				</CSSTransition>
 			</div>
 		);

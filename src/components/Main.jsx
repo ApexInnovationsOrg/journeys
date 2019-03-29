@@ -24,16 +24,13 @@ export default class Main extends Component {
 	render() {
 		return (
 			<div className="container">
-				<SideNavigation />
+				<SideNavigation sideNavExpanded={this.props.sideNavExpanded} />
 
-				<Header />
+				<Header sideNavExpanded={this.props.sideNavExpanded} />
 
 				<main style={{ position: "relative" }}>
 					{!this.props.isLoading && !this.props.error && (
-						<div
-							className={this.props.examComplete ? "blurred" : ""}
-							style={{ margin: "0 auto", maxWidth: "1000px", padding: "1em" }}
-						>
+						<div className={"question-container" + (this.props.examComplete ? " blurred" : "")}>
 							{/* Question */}
 							{this.props.question && <Question question={this.props.question} />}
 

@@ -9,12 +9,13 @@ export default class FollowUp extends Component {
 		animateIn: false
 	}
 
+	componentDidMount() {
+
+		this.setState({
+			animateIn: true
+		})
+	}
 	render() {
-		setTimeout(() => {
-			this.setState({
-				animateIn: true
-			})
-		}, 300)
 
 		return (
 			<div className="content-overlay translucent-dark">

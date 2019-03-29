@@ -58,9 +58,11 @@ export function updateexamResults(examComplete) {
 	}
 }
 
-export function updateExamResults(examResults = {
-	completed: false
-}) {
+export function updateExamResults(
+	examResults = {
+		completed: false
+	}
+) {
 	return {
 		type: UPDATE_EXAM_RESULTS,
 		examResults

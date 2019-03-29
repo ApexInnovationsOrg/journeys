@@ -15,6 +15,8 @@ import answers from "./answers"
 
 const initialState = {
 	// the last question in the questions array is always the "current" one
+	sideNavExpanded: false,
+	isMuted: false,
 	question: null,
 	answers: [],
 	selectedAnswerId: "",

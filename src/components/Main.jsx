@@ -21,36 +21,34 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class QuestionContent extends Component {
 	componentDidMount() {
-		store.dispatch(getQuestion(this.props.match.params.id))
+		store.dispatch(getQuestion(this.props.examID))
 	}
 	render() {
 		return (
 			<main style={{ position: "relative" }}>
-				{!this.props.parentProps.isLoading && !this.props.error && (
-					<div className={"question-container" + (this.props.parentProps.examComplete ? " blurred" : "")}>
+				{!this.props.isLoading && !this.props.error && (
+					<div className={"question-container" + (this.props.examComplete ? " blurred" : "")}>
 						{/* Question */}
-						{this.props.parentProps.question && <Question question={this.props.parentProps.question} />}
+						{this.props.question && <Question question={this.props.question} />}
 
 						{/* Answers */}
-						{this.props.parentProps.answers.length > 0 && <AnswerSelections {...this.props.parentProps} />}
+						{this.props.answers.length > 0 && <AnswerSelections {...this.props} />}
 
 						{/* Submit Answer Button */}
-						{this.props.parentProps.question && (
+						{this.props.question && (
 							<div className="right-align">
-								<SubmitAnswerButton {...this.props.parentProps} />
+								<SubmitAnswerButton {...this.props} />
 							</div>
 						)}
 					</div>
 				)}
 
-				{this.props.parentProps.examResults && <ExamCompletion className="zoom" {...this.props.parentProps} />}
+				{this.props.examResults && <ExamCompletion className="zoom" {...this.props} />}
 
-				{this.props.parentProps.followUp && <FollowUp {...this.props.parentProps} />}
+				{this.props.followUp && <FollowUp {...this.props} />}
 
 				{/* Loader */}
-				{(this.props.parentProps.isLoading || this.props.parentProps.error) && (
-					<Loader {...this.props.parentProps} />
-				)}
+				{(this.props.isLoading || this.props.error) && <Loader {...this.props} />}
 			</main>
 		)
 	}
@@ -66,8 +64,11 @@ export default class Main extends Component {
 				<Router>
 					<Switch>
 						<Route
-							path="/exam/:id"
-							render={props => <QuestionContent {...props} parentProps={this.props} />}
+							path="/exam/:examId"
+							render={routerProps => {
+								console.log(routerProps)
+								return <QuestionContent {...this.props} examID={routerProps.match.params.examId} />
+							}}
 						/>
 						<Route component={Welcome} />
 					</Switch>

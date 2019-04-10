@@ -2,6 +2,8 @@ import React, { Component } from "react"
 
 import logo from "../apex_logo_small.png"
 
+import "../styles/footer.scss"
+
 class Footer extends Component {
 	render() {
 		return (

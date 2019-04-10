@@ -82,7 +82,7 @@ export function getQuestion(treeID) {
 
 				if (question === undefined) {
 					// no question provided
-					dispatch(showError("No questions have been provided for this exam."))
+					dispatch(showError("There are no questions remaining in this exam."))
 				} else {
 					dispatch(updateQuestion(question))
 					dispatch(getAnswers())

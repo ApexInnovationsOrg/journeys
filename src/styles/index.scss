@@ -32,6 +32,10 @@ a {
 .valign-container {
   display: flex;
   align-items: center;
+
+  &.center-align {
+	  justify-content: center
+  }
 }
 
 .flexed {

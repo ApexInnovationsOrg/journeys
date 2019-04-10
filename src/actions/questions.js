@@ -68,7 +68,7 @@ export function getQuestion(treeID) {
 			body: JSON.stringify({
 				controller: "Exam",
 				action: "getQuestion",
-				treeID:treeID
+				treeID: treeID
 			})
 		})
 			.then(handleErrors)
@@ -98,7 +98,7 @@ function parseQuestion(questionJSON) {
 	let question = _first(_get(questionJSON, "question"))
 
 	if (question === undefined) return
-	
+
 	let questionContent = _map(_get(questionJSON, "content"), content => {
 		let parsedContent = JSON.parse(content)
 

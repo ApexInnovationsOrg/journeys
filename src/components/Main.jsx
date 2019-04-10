@@ -17,7 +17,7 @@ import ExamCompletion from "./ExamCompletion"
 import "../styles/journeys.scss"
 import FollowUp from "./FollowUp"
 
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class QuestionContent extends Component {
 	componentDidMount() {
@@ -64,8 +64,13 @@ export default class Main extends Component {
 
 				<Header sideNavExpanded={this.props.sideNavExpanded} />
 				<Router>
-					<Route exact path="/" render={() => <Welcome />} />
-					<Route path="/exam/:id" render={props => <QuestionContent {...props} parentProps={this.props} />} />
+					<Switch>
+						<Route
+							path="/exam/:id"
+							render={props => <QuestionContent {...props} parentProps={this.props} />}
+						/>
+						<Route component={Welcome} />
+					</Switch>
 				</Router>
 
 				<Footer />

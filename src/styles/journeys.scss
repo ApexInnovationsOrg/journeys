@@ -14,6 +14,7 @@
 }
 
 header {
+	box-sizing: border-box;
   grid-area: header;
   background-color: #dadada;
   padding: $padding-md $padding-lg;
@@ -25,7 +26,8 @@ header {
   border-bottom: 1px solid rgba(black, 0.05);
 
   .logo {
-    max-height: 75%;
+	 max-height: 75%;
+	 object-fit: contain;
   }
 }
 
@@ -119,7 +121,7 @@ main {
 
 @media all and (min-width: 1280px) {
   .container {
-    grid-template-rows: 5fr 55fr 8fr;
+    grid-template-rows: 3.8fr 55fr 8fr;
     grid-template-columns: 64px auto;
     grid-template-areas:
       "header header"
@@ -130,7 +132,7 @@ main {
 
 @media all and (max-width: 1280px) {
   .container {
-    grid-template-rows: 6fr 69fr 10fr;
+    grid-template-rows: 4.8fr 69fr 10fr;
     grid-template-columns: 64px auto;
     grid-template-areas:
       "header header"
@@ -141,7 +143,7 @@ main {
 
 @media all and (max-width: 980px) {
   .container {
-    grid-template-rows: 5fr 44fr 8fr;
+    grid-template-rows: 3.8fr 44fr 8fr;
     grid-template-columns: 0 auto;
     grid-template-areas:
       "header header"
@@ -170,7 +172,7 @@ main {
 
 @media all and (max-width: 736px) {
 	.container {
-		grid-template-rows: 5fr 39fr 8fr;
+		grid-template-rows: 4.5fr 39fr 8fr;
 		grid-template-columns: 64px auto;
 		grid-template-areas:
       "header header header"

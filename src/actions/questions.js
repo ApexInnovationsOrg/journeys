@@ -54,7 +54,7 @@ export function getAnswers() {
 	}
 }
 
-export function getQuestion() {
+export function getQuestion(treeID) {
 	return dispatch => {
 		dispatch(beginLoading("Loading next question"))
 
@@ -67,7 +67,8 @@ export function getQuestion() {
 			},
 			body: JSON.stringify({
 				controller: "Exam",
-				action: "getQuestion"
+				action: "getQuestion",
+				treeID:treeID
 			})
 		})
 			.then(handleErrors)

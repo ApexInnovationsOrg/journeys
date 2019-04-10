@@ -16,10 +16,45 @@ import ExamCompletion from "./ExamCompletion"
 import "../styles/journeys.scss"
 import FollowUp from "./FollowUp"
 
-export default class Main extends Component {
-	componentDidMount() {
-		store.dispatch(getQuestion())
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+class QuestionContent extends Component{
+	componentDidMount()
+	{
+		store.dispatch(getQuestion(this.props.match.params.id))
+
 	}
+	render()
+	{
+		return <main style={{ position: "relative" }}>				
+					{!this.props.parentProps.isLoading && !this.props.error && (
+						<div className={"question-container" + (this.props.parentProps.examComplete ? " blurred" : "")}>
+							{/* Question */}
+							{this.props.parentProps.question && <Question question={this.props.parentProps.question} />}
+
+							{/* Answers */}
+							{this.props.parentProps.answers.length > 0 && <AnswerSelections {...this.props.parentProps} />}
+
+							{/* Submit Answer Button */}
+							{this.props.parentProps.question && (
+								<div className="right-align">
+									<SubmitAnswerButton {...this.props.parentProps} />
+								</div>
+							)}
+						</div>
+					)}
+
+					{this.props.parentProps.examResults && <ExamCompletion className="zoom" {...this.props.parentProps} />}
+
+					{this.props.parentProps.followUp && <FollowUp {...this.props.parentProps} />}
+
+					{/* Loader */}
+					{(this.props.parentProps.isLoading || this.props.parentProps.error) && <Loader {...this.props.parentProps} />}
+				</main>
+	}
+}
+
+export default class Main extends Component {
 
 	render() {
 		return (
@@ -27,32 +62,10 @@ export default class Main extends Component {
 				<SideNavigation sideNavExpanded={this.props.sideNavExpanded} />
 
 				<Header sideNavExpanded={this.props.sideNavExpanded} />
+				<Router>
+					<Route path="/exam/:id" render={(props)=> <QuestionContent {...props} parentProps={this.props}/>}/>
+				</Router>
 
-				<main style={{ position: "relative" }}>
-					{!this.props.isLoading && !this.props.error && (
-						<div className={"question-container" + (this.props.examComplete ? " blurred" : "")}>
-							{/* Question */}
-							{this.props.question && <Question question={this.props.question} />}
-
-							{/* Answers */}
-							{this.props.answers.length > 0 && <AnswerSelections {...this.props} />}
-
-							{/* Submit Answer Button */}
-							{this.props.question && (
-								<div className="right-align">
-									<SubmitAnswerButton {...this.props} />
-								</div>
-							)}
-						</div>
-					)}
-
-					{this.props.examResults && <ExamCompletion className="zoom" {...this.props} />}
-
-					{this.props.followUp && <FollowUp {...this.props} />}
-
-					{/* Loader */}
-					{(this.props.isLoading || this.props.error) && <Loader {...this.props} />}
-				</main>
 
 				<Footer />
 			</div>

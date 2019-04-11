@@ -61,12 +61,11 @@ export default class Main extends Component {
 				<SideNavigation sideNavExpanded={this.props.sideNavExpanded} />
 
 				<Header sideNavExpanded={this.props.sideNavExpanded} />
-				<Router>
+				<Router basename="/Classroom/journey">
 					<Switch>
 						<Route
 							path="/exam/:examId"
 							render={routerProps => {
-								console.log(routerProps)
 								return <QuestionContent {...this.props} examID={routerProps.match.params.examId} />
 							}}
 						/>

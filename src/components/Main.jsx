@@ -61,7 +61,7 @@ export default class Main extends Component {
 				<SideNavigation sideNavExpanded={this.props.sideNavExpanded} />
 
 				<Header sideNavExpanded={this.props.sideNavExpanded} />
-				<Router basename="/Classroom/journey">
+				<Router basename={process.env.NODE_ENV === "development" ? "/" : "/Classroom/journey"}>
 					<Switch>
 						<Route
 							path="/exam/:examId"

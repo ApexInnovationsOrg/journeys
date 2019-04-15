@@ -8,7 +8,13 @@ export default class Welcome extends Component {
 					<h1 className="primary-text" style={{ fontSize: "3em" }}>
 						Welcome to Journeys!
 					</h1>
-					<h3>
+					<h3
+						style={{
+							maxWidth: "700px",
+							color: "#ddd",
+							fontSize: "1.4em"
+						}}
+					>
 						If you're seeing this, it's likely because you navigated here without an exam being specified.
 					</h3>
 				</div>

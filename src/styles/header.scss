@@ -1,0 +1,19 @@
+@import "./padding.scss";
+
+header {
+	box-sizing: border-box;
+	grid-area: header;
+	background-color: #f0f0f0;
+	padding: $padding-md $padding-lg;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	min-height: 60px;
+	max-height: 80px;
+	border-bottom: 1px solid rgba(black, 0.05);
+
+	.logo {
+		max-height: 75%;
+		object-fit: contain;
+	}
+}

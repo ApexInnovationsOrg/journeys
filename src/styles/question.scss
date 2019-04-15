@@ -67,7 +67,7 @@
 						max-height: 100px;
 					}
 				}
-				
+
 				.content {
 					height: 100%;
 					width: 100%;
@@ -86,7 +86,8 @@
 				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6ffffff', GradientType=1);
 				/* IE6-9 fallback on horizontal gradient */
 
-				will-change: transform, opacity;
+				will-change: transform,
+				opacity;
 				transition: all 400ms cubic-bezier(0.28, 0.735, 0.25, 1.2);
 				transform-origin: top left;
 
@@ -137,7 +138,8 @@
 		}
 	}
 
-	video, img {
+	video,
+	img {
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
@@ -148,17 +150,21 @@
 .media-enter {
 	max-height: 560px;
 }
+
 .media-enter-active {
 	max-height: 300px;
 	transition: all 400ms cubic-bezier(0, 0.685, 0.32, 1.16);
 }
+
 .media-exit {
 	max-height: 300px;
 }
+
 .media-exit-active {
 	max-height: 560px;
 	transition: all 400ms cubic-bezier(0, 0.685, 0.32, 1.16);
 }
+
 .media-enter-done {
 	max-height: 300px;
 }
@@ -170,7 +176,7 @@
 	height: auto;
 	text-overflow: ellipsis;
 	font-size: 1.1em;
-	
+
 	h3 {
 		margin: 0;
 	}
@@ -179,8 +185,9 @@
 		white-space: pre-wrap;
 	}
 
-	span, p {
-		
+	span,
+	p {
+
 		font-family: inherit !important;
 		font-size: inherit !important;
 	}
@@ -190,26 +197,34 @@
 		font-size: inherit !important;
 	}
 }
+
 .question-enter {
 	max-height: auto;
 }
+
 .question-enter-active {
+	font-size: 1.4em;
 	max-height: 600px;
 	transition: all 400ms cubic-bezier(0, 0.885, 0.32, 1.06);
 }
+
 .question-exit {
+	font-size: 1.4em;
 	max-height: 600px;
 }
+
 .question-exit-active {
 	max-height: auto;
-  	transition: all 400ms cubic-bezier(0, 0.885, 0.32, 1.06);
+	transition: all 400ms cubic-bezier(0, 0.885, 0.32, 1.06);
 }
+
 .question-enter-done {
+	font-size: 1.4em;
 	max-height: 600px;
 }
 
 .followUp {
-	
+
 	.card {
 		max-width: 700px;
 		max-height: 700px;
@@ -218,14 +233,15 @@
 		div {
 			font-size: 1.3em;
 		}
-			* {
-				margin: 0;
-			}
-		
-			* + * {
-				margin-top: 1em;
-			}
-		
+
+		* {
+			margin: 0;
+		}
+
+		*+* {
+			margin-top: 1em;
+		}
+
 	}
 }
 
@@ -233,20 +249,24 @@
 	opacity: 0;
 	transform: scale(0.8);
 }
+
 .followUp-enter-active {
 	opacity: 1;
 	transform: scale(1);
 	transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.0)
 }
+
 .followUp-exit {
 	opacity: 1;
 	transform: scale(1);
 }
+
 .followUp-exit-active {
 	opacity: 0;
 	transform: scale(0.8);
-  	transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.0)
+	transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.0)
 }
+
 .followUp-enter-done {
 	opacity: 1;
 	transform: scale(1);
@@ -254,47 +274,47 @@
 
 
 .answerSelections {
-  list-style-position: inside;
-  padding-left: $margin-lg;
+	list-style-position: inside;
+	padding-left: $margin-lg;
 
-  li {
-    cursor: pointer;
-	 list-style-type: none;
-    font-weight: bold;
-	 font-size: 1.2em;
-	 display: flex;
-	 align-items: center;
-	 
-	 * {
-		 font-family: inherit !important;
-		 font-size: inherit !important;
-	 }
+	li {
+		cursor: pointer;
+		list-style-type: none;
+		font-weight: bold;
+		font-size: 1.2em;
+		display: flex;
+		align-items: center;
 
-    &:before {
-      content: "\25CB";
-      padding: 0 $padding-md;
-    }
-
-    &.selected {
-		background-color: $primary;
-		color: white;
-		
 		* {
-			color: white !important;
+			font-family: inherit !important;
+			font-size: inherit !important;
 		}
 
-      &:before {
-        content: "\25C9";
-        color: white;
-      }
-    }
+		&:before {
+			content: "\25CB";
+			padding: 0 $padding-md;
+		}
 
-    &:not(.selected):hover {
-      background-color: lighten($primary, 40%);
-    }
+		&.selected {
+			background-color: $primary;
+			color: white;
 
-    &:not(.selected):active {
-      background-color: lighten($primary, 20%);
-    }
-  }
+			* {
+				color: white !important;
+			}
+
+			&:before {
+				content: "\25C9";
+				color: white;
+			}
+		}
+
+		&:not(.selected):hover {
+			background-color: lighten($primary, 40%);
+		}
+
+		&:not(.selected):active {
+			background-color: lighten($primary, 20%);
+		}
+	}
 }

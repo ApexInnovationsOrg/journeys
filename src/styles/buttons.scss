@@ -1,7 +1,8 @@
 @import "./variables.scss";
 @import "./colors.scss";
 
-button, .btn {
+button,
+.btn {
 	appearance: none;
 	background-color: #aaa;
 	border: $border;
@@ -12,7 +13,8 @@ button, .btn {
 	font-weight: bold;
 	cursor: pointer;
 
-	&:disabled, &.disabled {
+	&:disabled,
+	&.disabled {
 		opacity: 0.5;
 	}
 
@@ -25,23 +27,25 @@ button, .btn {
 		border: none;
 		color: #aaa;
 
-	&.primary {
-		color: $primary;
-	}
+		&.primary {
+			color: $primary;
+		}
 
-	&.translucent-light {
-		color: $translucent-light;
-	}
-	&.translucent {
-		color: $translucent;
-	}
-	&.translucent-dark {
-		color: $translucent-dark;
-	}
+		&.translucent-light {
+			color: $translucent-light;
+		}
 
-	&.selected {
-		color: $primary;
-	}
+		&.translucent {
+			color: $translucent;
+		}
+
+		&.translucent-dark {
+			color: $translucent-dark;
+		}
+
+		&.selected {
+			color: $primary;
+		}
 	}
 
 	&.primary {
@@ -52,9 +56,11 @@ button, .btn {
 		background-color: $translucent-light;
 		color: #333;
 	}
+
 	&.translucent {
 		background-color: $translucent;
 	}
+
 	&.translucent-dark {
 		background-color: $translucent-dark;
 	}
@@ -68,6 +74,7 @@ button, .btn {
 	svg:last-child:not(:first-child) {
 		margin: 0 0 0 $margin-sm;
 	}
+
 	svg:first-child:not(:last-child) {
 		margin: 0 $margin-sm 0 0;
 	}

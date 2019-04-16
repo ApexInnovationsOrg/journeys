@@ -36,7 +36,7 @@ export default class Question extends Component {
 
 	render() {
 		// FIXME:  get rid of these once question object is fully fleshed out coming from the backend
-		const MAX_QUESTION_LENGTH = 500
+		const MAX_QUESTION_LENGTH = 400
 
 		return (
 			<div>

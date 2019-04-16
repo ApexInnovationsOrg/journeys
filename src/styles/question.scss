@@ -8,7 +8,6 @@
 	display: block;
 	width: 100%;
 	max-height: 560px;
-	// height: 560px;
 	overflow: hidden;
 	border-radius: 6px;
 	margin: 0 auto;
@@ -53,7 +52,7 @@
 				background-color: white;
 				margin: $margin-lg $margin-md $margin-md $margin-sm;
 				max-width: 700px;
-				max-height: 300px;
+				max-height: 200px;
 				pointer-events: all;
 				position: relative;
 				border-radius: 8px;
@@ -128,7 +127,7 @@
 		}
 
 		.sectionTabs {
-			min-height: 80px;
+			min-height: 50px;
 			pointer-events: all;
 			padding: $padding-md;
 
@@ -200,6 +199,8 @@
 
 .question-enter {
 	max-height: auto;
+	font-size: 1.1em;
+
 }
 
 .question-enter-active {
@@ -215,6 +216,8 @@
 
 .question-exit-active {
 	max-height: auto;
+	font-size: 1.1em;
+
 	transition: all 400ms cubic-bezier(0, 0.885, 0.32, 1.06);
 }
 

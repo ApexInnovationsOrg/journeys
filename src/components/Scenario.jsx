@@ -30,7 +30,12 @@ export default class Scenario extends Component {
 		}
 
 		return (
-			<div className="scenario">
+			<div
+				className="scenario"
+				style={{
+					minHeight: _isEmpty(sections) ? undefined : "300px"
+				}}
+			>
 				<div className="overlay">
 					{/* Current Section */}
 					{selectedSection && (

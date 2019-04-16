@@ -36,6 +36,21 @@ export default class Scenario extends Component {
 					minHeight: _isEmpty(sections) ? undefined : "300px"
 				}}
 			>
+				{Media && (
+					<div>
+						{mediaType.key === "image" && <img src={Media} alt={Media} />}
+
+						{mediaType.key === "video" && (
+							<video autoPlay>
+								<source src={Media} type={"video/" + mediaType.extension} />
+								Your browser does not support HTML5 videos.
+							</video>
+						)}
+
+						{mediaType.key === "unknown" && <p className="red-text">Unable to determine media type.</p>}
+					</div>
+				)}
+
 				<div className="overlay">
 					{/* Current Section */}
 					{selectedSection && (
@@ -85,21 +100,6 @@ export default class Scenario extends Component {
 						</div>
 					)}
 				</div>
-
-				{Media && (
-					<div>
-						{mediaType.key === "image" && <img src={Media} alt={Media} />}
-
-						{mediaType.key === "video" && (
-							<video autoPlay>
-								<source src={Media} type={"video/" + mediaType.extension} />
-								Your browser does not support HTML5 videos.
-							</video>
-						)}
-
-						{mediaType.key === "unknown" && <p className="red-text">Unable to determine media type.</p>}
-					</div>
-				)}
 			</div>
 		)
 	}

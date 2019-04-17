@@ -1,12 +1,12 @@
-import { connect } from "react-redux";
+import { connect } from "react-redux"
 
-import Main from "./components/Main";
-import { bindActionCreators } from "redux";
-import * as actionCreators from "./actions";
-import * as questionActionCreators from "./actions/questions";
+import Main from "./components/Main"
+import { bindActionCreators } from "redux"
+import * as actionCreators from "./actions"
+import * as questionActionCreators from "./actions/questions"
 
 function mapStateToProps(state) {
-	return { ...state };
+	return { ...state }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -16,10 +16,10 @@ function mapDispatchToProps(dispatch) {
 			...questionActionCreators
 		},
 		dispatch
-	);
+	)
 }
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Main);
+)(Main)

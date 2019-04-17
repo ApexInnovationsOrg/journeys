@@ -58,7 +58,7 @@ export default class Main extends Component {
 	render() {
 		return (
 			<div className="container">
-				{/* <SideNavigation sideNavExpanded={this.props.sideNavExpanded} /> */}
+				<SideNavigation sideNavExpanded={this.props.sideNavExpanded} />
 
 				<Header sideNavExpanded={this.props.sideNavExpanded} />
 				<Router basename={process.env.NODE_ENV === "development" ? "/" : "/Classroom/journey"}>

@@ -15,15 +15,16 @@ export default class Scenario extends Component {
 		super(props)
 
 		this.state = {
-			selectedSectionIndex: 0,
-			contentHidden: false
+			selectedSectionIndex: null,
+			contentHidden: true
 		}
 	}
 
 	render() {
 		const { Media, sections } = this.props.question
 
-		const selectedSection = sections[this.state.selectedSectionIndex]
+		const selectedSection =
+			this.state.selectedSectionIndex !== null ? sections[this.state.selectedSectionIndex] : null
 
 		if (Media) {
 			var mediaType = getMediaType(Media)
@@ -53,7 +54,7 @@ export default class Scenario extends Component {
 
 				<div className="overlay">
 					{/* Current Section */}
-					{selectedSection && (
+					{
 						<div className="currentSection">
 							<div
 								className="avatar"
@@ -64,15 +65,21 @@ export default class Scenario extends Component {
 
 							<div className={"sectionContent " + (this.state.contentHidden ? " collapsed" : "")}>
 								<div className="content">
-									<h3 className="secondary-text margin-bottom-sm">{selectedSection.title}</h3>
-									<span dangerouslySetInnerHTML={{ __html: selectedSection.content }} />
+									<h3 className="secondary-text margin-bottom-sm">
+										{selectedSection ? selectedSection.title : null}
+									</h3>
+									<span
+										dangerouslySetInnerHTML={{
+											__html: selectedSection ? selectedSection.content : null
+										}}
+									/>
 								</div>
 								<div onClick={() => this.setState({ contentHidden: true })} className="closeButton">
 									<FontAwesomeIcon icon="times" color="red" />
 								</div>
 							</div>
 						</div>
-					)}
+					}
 
 					{/* Tabs */}
 					{!_isEmpty(sections) && (

@@ -34,6 +34,7 @@ export function getAnswers() {
 			headers: {
 				"content-type": "application/json"
 			},
+			credentials: 'include',
 			body: JSON.stringify({
 				controller: "Exam",
 				action: "getAnswers"
@@ -65,6 +66,7 @@ export function getQuestion(examID) {
 			headers: {
 				"content-type": "application/json"
 			},
+			credentials: 'include',
 			body: JSON.stringify({
 				controller: "Exam",
 				action: "getQuestion",
@@ -132,6 +134,7 @@ export function submitAnswer(answerId) {
 			headers: {
 				"content-type": "application/json"
 			},
+			credentials: 'include',
 			body: JSON.stringify({
 				controller: "Exam",
 				action: "submitAnswer",
@@ -165,6 +168,7 @@ export function getExamResults() {
 			headers: {
 				"content-type": "application/json"
 			},
+			credentials: 'include',
 			body: JSON.stringify({
 				controller: "Exam",
 				action: "getExamResults"

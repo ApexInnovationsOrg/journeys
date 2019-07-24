@@ -25,10 +25,9 @@ function handleErrors(response) {
 	return response
 }
 
-export function getAnswers() {
+export function getAnswers(treeID) {
 	return dispatch => {
 		dispatch(beginLoading("Loading possible answers"))
-
 		return fetch(process.env.REACT_APP_API_LOCATION, {
 			method: "POST",
 			headers: {
@@ -37,7 +36,8 @@ export function getAnswers() {
 			credentials: 'include',
 			body: JSON.stringify({
 				controller: "Exam",
-				action: "getAnswers"
+				action: "getAnswers",
+				treeID:treeID
 			})
 		})
 			.then(handleErrors)
@@ -56,7 +56,7 @@ export function getAnswers() {
 }
 
 export function getQuestion(examID) {
-	return dispatch => {
+	return dispatch => { 
 		dispatch(beginLoading("Loading next question"))
 
 		dispatch(updateFollowUp())
@@ -77,9 +77,8 @@ export function getQuestion(examID) {
 			.then(res => res.json())
 			.then(json => {
 				dispatch(finishLoading())
-
 				if (!json.success) return dispatch(showError(json.errormsg))
-
+				
 				let question = parseQuestion(_get(json, "data"))
 
 				if (question === undefined) {
@@ -87,7 +86,7 @@ export function getQuestion(examID) {
 					dispatch(showError("There are no questions remaining in this exam."))
 				} else {
 					dispatch(updateQuestion(question))
-					dispatch(getAnswers())
+					dispatch(getAnswers(examID))
 				}
 
 				return json.data[0]
@@ -97,7 +96,7 @@ export function getQuestion(examID) {
 }
 
 function parseQuestion(questionJSON) {
-	let question = _first(_get(questionJSON, "question"))
+	let question = _first(_get(questionJSON, "node"))
 
 	if (question === undefined) return
 
@@ -157,12 +156,13 @@ export function submitAnswer(answerId) {
 	}
 }
 
-export function getExamResults() {
+export function getExamResults(examID) {
 	return dispatch => {
 		dispatch(beginLoading("Loading exam results"))
 
 		dispatch(updateFollowUp())
 
+		
 		return fetch(process.env.REACT_APP_API_LOCATION, {
 			method: "POST",
 			headers: {
@@ -171,7 +171,8 @@ export function getExamResults() {
 			credentials: 'include',
 			body: JSON.stringify({
 				controller: "Exam",
-				action: "getExamResults"
+				action: "getExamResults",
+				treeID: this
 			})
 		})
 			.then(handleErrors)

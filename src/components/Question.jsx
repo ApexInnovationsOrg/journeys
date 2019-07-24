@@ -18,7 +18,7 @@ export default class Question extends Component {
 	static propTypes = {
 		question: PropTypes.shape({
 			ID: PropTypes.string.isRequired,
-			QuestionText: PropTypes.string.isRequired,
+			NodeText: PropTypes.string.isRequired,
 			Media: PropTypes.string,
 			Content: PropTypes.arrayOf(
 				PropTypes.shape({
@@ -54,7 +54,7 @@ export default class Question extends Component {
 								{!this.state.questionExpanded && (
 									<h3
 										dangerouslySetInnerHTML={{
-											__html: _truncate(this.props.question.QuestionText, {
+											__html: _truncate(this.props.question.NodeText, {
 												length: MAX_QUESTION_LENGTH
 											})
 										}}
@@ -63,11 +63,11 @@ export default class Question extends Component {
 
 								{/* full */}
 								{this.state.questionExpanded && (
-									<div dangerouslySetInnerHTML={{ __html: this.props.question.QuestionText }} />
+									<div dangerouslySetInnerHTML={{ __html: this.props.question.NodeText }} />
 								)}
 							</div>
 						</div>
-						{this.props.question.QuestionText.length > MAX_QUESTION_LENGTH && (
+						{this.props.question.NodeText.length > MAX_QUESTION_LENGTH && (
 							<button
 								title="Expand or collapse question"
 								style={{ position: "absolute", right: "12px" }}

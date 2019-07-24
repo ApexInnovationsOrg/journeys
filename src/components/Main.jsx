@@ -21,6 +21,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class QuestionContent extends Component {
 	componentDidMount() {
+
 		store.dispatch(getQuestion(this.props.examID))
 	}
 	render() {

@@ -13,7 +13,7 @@ export default class NextQuestionButton extends Component {
 				className="primary"
 				onClick={
 					this.props.examComplete
-						? this.props.getExamResults.bind(null)
+						? this.props.getExamResults.bind(this.props.examID)
 						: this.props.getQuestion.bind(null, this.props.examID)
 				}
 			>

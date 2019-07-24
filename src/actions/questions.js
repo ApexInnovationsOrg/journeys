@@ -124,10 +124,9 @@ function parseQuestion(questionJSON) {
 
 	return question
 }
-export function submitAnswer(answerId) {
+export function submitAnswer(data) {
 	return dispatch => {
 		dispatch(beginLoading("Submitting answer"))
-
 		return fetch(process.env.REACT_APP_API_LOCATION, {
 			method: "POST",
 			headers: {
@@ -137,7 +136,8 @@ export function submitAnswer(answerId) {
 			body: JSON.stringify({
 				controller: "Exam",
 				action: "submitAnswer",
-				data: answerId
+				data: data.answerID,
+				treeID:data.examID
 			})
 		})
 			.then(handleErrors)

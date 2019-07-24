@@ -12,7 +12,7 @@ export default class SubmitAnswerButton extends Component {
 			<button
 				className="primary"
 				disabled={!this.props.selectedAnswerId || this.props.followUp || this.props.isLoading || this.props.error}
-				onClick={this.props.submitAnswer.bind(null, this.props.selectedAnswerId)}
+				onClick={this.props.submitAnswer.bind(null, {answerID:this.props.selectedAnswerId,examID:this.props.examID})}
 			>
 				<span>Submit Answer</span>
 				<FontAwesomeIcon icon="chevron-circle-right" />

@@ -22,7 +22,21 @@
 		height: 100%;
 		top: 0;
 		background-color: rgba(black, 0.3);
-
+		.progressContainer{
+			position:absolute;
+			width:100%;
+			height:10px;
+			bottom:0;
+			left:0;
+			background:rgba(128, 128, 128, 0.486);
+			.progressFiller{
+				position: inherit;
+				height:inherit;
+				bottom:0;
+				left:0;
+				background:rgba(0, 197, 0, 0.541);
+			}
+		}
 		.currentSection {
 			display: flex;
 			justify-content: flex-start;

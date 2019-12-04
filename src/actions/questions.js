@@ -122,6 +122,8 @@ function parseQuestion(questionJSON) {
 		type: "bubble"
 	})
 
+	question.progress = questionJSON.progress;
+
 	return question
 }
 export function submitAnswer(data) {

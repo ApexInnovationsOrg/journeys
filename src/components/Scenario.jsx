@@ -5,7 +5,6 @@ import { isEmpty as _isEmpty } from "lodash"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faTimes } from "@fortawesome/free-solid-svg-icons"
-import { ProgressIndicator } from "./Progress";
 
 import { getMediaType } from "../utils.js"
 
@@ -109,8 +108,7 @@ export default class Scenario extends Component {
 						</div>
 					)}
 
-					<ProgressIndicator {...this.props}/>	
-				</div>
+				</div>	
 			</div>
 		)
 	}

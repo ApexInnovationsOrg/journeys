@@ -7,6 +7,7 @@ import { truncate as _truncate } from "lodash"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faExpand, faCompress } from "@fortawesome/free-solid-svg-icons"
+import { ProgressIndicator } from "./Progress";
 
 import Scenario from "./Scenario"
 
@@ -47,8 +48,8 @@ export default class Question extends Component {
 
 				{/* Text */}
 				<CSSTransition in={this.state.questionExpanded} timeout={400} classNames="question">
-					<div style={{ position: "relative" }} className="question card margin-top-lg flexed">
-						<div style={{ overflowY: "auto", paddingRight: "2.5em" }}>
+					<div style={{ position: "relative" }} className="question card padding-left-md padding-top-md padding-right-md  padding-bottom-lg margin-top-lg flexed">
+						<div className="margin-bottom-lg" style={{ overflowY: "auto", paddingRight: "2.5em" }}>
 							<div className="margin-sm">
 								{/* truncated */}
 								{!this.state.questionExpanded && (
@@ -77,6 +78,7 @@ export default class Question extends Component {
 								<FontAwesomeIcon icon={this.state.questionExpanded ? "compress" : "expand"} size="lg" />
 							</button>
 						)}
+						<ProgressIndicator {...this.props}/>
 					</div>
 				</CSSTransition>
 			</div>

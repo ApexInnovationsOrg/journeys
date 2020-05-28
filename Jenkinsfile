@@ -3,6 +3,11 @@
 pipeline {
     agent any
     stages {
+		stage('Start'){
+            steps{
+                rocketSend message: "Build for journeys Started", channel: 'jenkins'
+            }
+        }	
         stage('Prepare environment') {
             steps {
                 sh "/var/lib/jenkins/scripts/prepenv.sh"

@@ -22,8 +22,19 @@ pipeline {
         }
         stage('Push to staging'){
             steps{
-               sh 'rsync -avz build/* bwhite@app4.apexinnovations.com:~/apexwebtest/Classroom/journey'
+                sh 'rsync -avzri --exclude="/*/*/" ./ bitnami@apexwebtest.apexinnovations.com:/apex/htdocs/Classroom'
             }
+        }
+    }
+    post {
+        success{
+            rocketSend message: "Build for journey great success! ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿) ᕗ", emoji:':camera_with_flash:', channel: 'jenkins'
+        }
+        unstable{
+            rocketSend message: "Build unstable (∩︵∩)", channel: 'jenkins'
+        }
+        failure{
+            rocketSend message: "Journey Build Failed ┏༼ ◉ ╭╮ ◉༽┓", emoji:':thumbsdown:', channel: 'jenkins'
         }
     }
 }

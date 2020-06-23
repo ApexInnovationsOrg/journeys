@@ -21,13 +21,12 @@ pipeline {
         }
         stage('Build Package'){
             steps {
-                sh 'npm install'
                 sh 'npm run build'
             }   
         }
         stage('Push to staging'){
             steps{
-                sh 'rsync -avzri --exclude="/*/*/" ./ bitnami@apexwebtest.apexinnovations.com:/apex/htdocs/Classroom/journeys'
+                sh 'rsync -avz --no-perms --no-owner --no-group ./build/* bitnami@apexwebtest.apexinnovations.com:/apex/htdocs/Classroom/journeys'
             }
         }
     }
